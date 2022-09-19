@@ -18,15 +18,20 @@ function App() {
         fetchPokemon().then(() => {
             /** noop **/
         })
-    }, [searchValue])
+    }, [])
+
+    useEffect(() => {
+        setPokemon(
+            pokemonIndex.filter(
+                (monster) => monster.name.indexOf(searchValue.toLowerCase()) !== -1
+            )
+        );
+    }, [searchValue, pokemonIndex]);
+    
 
     const onSearchValueChange = (event) => {
         const value = event.target.value
         setSearchValue(value)
-
-        setPokemon(
-            pokemonIndex.filter(monster => !monster.name.includes(value))
-        )
     }
 
     const onGetDetails = (name) => async () => {
@@ -39,7 +44,7 @@ function App() {
                 <input value={searchValue} onChange={onSearchValueChange} placeholder={'Search Pokemon'}/>
             </div>
             <div className={'pokedex__content'}>
-                {pokemon.length > 0 && (
+                {pokemon.length > 0 ? (
                     <div className={'pokedex__search-results'}>
                         {
                             pokemon.map(monster => {
@@ -54,6 +59,8 @@ function App() {
                             })
                         }
                     </div>
+                ) : (
+                    <div className={"pokedex__search-results"}>No Results Found</div>
                 )}
                 {
                     pokemonDetails && (
