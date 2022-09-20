@@ -47,7 +47,14 @@ When you are finished, please upload your completed work to your Github and invi
 Please take some time to answer the following questions. Your answers should go directly in this `readme`.
 
 - Given more time, what would you suggest for improving the performance of this app?
+Given more time, I’d want to figure out what exactly is going on with the “Evolutions”. I’m only getting one out of the API but the mockup suggests there should be three. I’d might need to recursively fetch the next evolution, but I've ran out of time to make sense of the interesting mix of Pokemon lore and API usage. 
 
 - Is there anything you would consider doing if we were to go live with this app?
+Lots.
+I went ahead and limited the “Moves” to 4, as that’s what the mockup displayed, but would want to confirm this is desired. 
+There’s also some UX questions… should the details be cleared when the search criteria omit the detailed Pokemon? 
+A mobile friendly version would be required.
+More error handling, specifically on the details display and perhaps some loading animations.
 
 - What was the most challenging aspect of this work for you (if at all)?
+The most challenging aspect of this was just trying to understand the Evolutions. I’m betting there’s some gains to be had with those API calls and would hope there’s a more concise way to tease out the information we need; maybe a graphQL endpoint? 
