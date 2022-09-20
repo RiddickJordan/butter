@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAllPokemon } from "./api";
+import { fetchAllPokemon, fetchPokemonSpeciesByName, fetchPokemonDetailsByName, fetchEvolutionChainById } from "./api";
 
 function App() {
     const [pokemonIndex, setPokemonIndex] = useState([])
@@ -35,7 +35,22 @@ function App() {
     }
 
     const onGetDetails = (name) => async () => {
-        /** code here **/
+        try{
+            const species = await fetchPokemonSpeciesByName(name)
+            const details = await fetchPokemonDetailsByName(name);
+            const evolution = await fetchEvolutionChainById(species.id);
+
+            setPokemonDetails({
+                'name':details.name,
+                'moves': details.moves.slice(0, 4),
+                'types': details.types,
+                'evolution':evolution.chain.evolves_to
+            });  
+        }
+        catch{
+            console.log('error')
+        }
+              
     }
 
     return (
@@ -64,9 +79,33 @@ function App() {
                 )}
                 {
                     pokemonDetails && (
-                        <div className={'pokedex__details'}>
-                            {/*  code here  */}
-                        </div>
+                        <article className={'pokedex__details'}>
+                            <h2>{pokemonDetails.name}</h2>
+                            <section className="pokedex__types">
+                                <h3>Types</h3>
+                                <ul>
+                                    {
+                                      pokemonDetails.types.map(slot => <li>{slot.type.name}</li>)
+                                    }
+                                </ul>
+                            </section>
+                            <section className="pokedex__moves">
+                                <h3>Moves</h3>
+                                <ul>
+                                    {
+                                      pokemonDetails.moves.map(slot => <li>{slot.move.name}</li>)
+                                    }
+                                </ul>
+                            </section>
+                            <section className="pokedex__evolution">
+                                <h3>Evolutions</h3>
+                                <ul>
+                                    {
+                                      pokemonDetails.evolution.map(monster => <li>{monster.species.name}</li>)
+                                    }
+                                </ul>
+                            </section>
+                        </article>
                     )
                 }
             </div>

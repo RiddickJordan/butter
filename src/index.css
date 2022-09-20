@@ -29,7 +29,7 @@ body {
 .pokedex__search-results {
   border: 2px solid red;
   border-radius: 5px;
-  overflow:scroll;
+  overflow-y:scroll;
 }
 
 .pokedex__list-item {
@@ -45,4 +45,35 @@ body {
 }
 
 .pokedex__details {
+  border: 2px solid black;
+  align-self: flex-start;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-around;
+  gap:1rem;
+  max-width: 300px;
+}
+
+h2{
+  width:100%;
+  text-align: center;
+}
+
+.pokedex__types, .pokedex__moves{
+  display:inline-block;
+}
+
+ul{
+  padding-left:1rem;
+}
+
+.pokedex__evolution{
+  min-width: 100%;
+  text-align: center;
+}
+
+.pokedex__evolution ul{
+  padding:0;
+  list-style:none;
+  font-style:italic;
 }
